@@ -43,7 +43,3 @@ class TestCheckout():
 
     def test_with_group_discount__misssed(self):
         assert checkout_solution.checkout('ST') == 40
-
-
-
-
