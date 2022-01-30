@@ -69,15 +69,15 @@ def checkout(skus):
             group_items_count = sum(checkout_items.get(sku, 0) for sku in offer.items)
             applied_offer_count = int(group_items_count / offer.quantity)
             sorted_group_items = sorted(
-                [PRICE_LIST[sku] for sku in offer.items],
+                offer.items,
+                key=lambda sku: PRICE_LIST[sku],
                 reverse=True,
             )
-            print(applied_offer_count, sorted_group_items)
             for _ in range(applied_offer_count):
                 remainder = offer.quantity
                 # Try to apply offer to items that cost more individually first
                 for sku in sorted_group_items:
-                    offer_items_count = min(remainder, offer.quantity, checkout_items[sku], 0)
+                    offer_items_count = min(remainder, offer.quantity, checkout_items[sku])
                     remainder -= offer_items_count
                     checkout_items[sku] -= offer_items_count
 
@@ -104,6 +104,7 @@ def checkout(skus):
         total += PRICE_LIST[sku] * quantity
     
     return total
+
 
 
 
