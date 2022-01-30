@@ -21,14 +21,14 @@ PRICE_LIST = {
     'P': 50,
     'Q': 30,
     'R': 50,
-    'S': 30,
+    'S': 20,
     'T': 20,
     'U': 40,
     'V': 50,
     'W': 20,
-    'X': 90,
-    'Y': 10,
-    'Z': 50,
+    'X': 17,
+    'Y': 20,
+    'Z': 21,
 
 }
 
@@ -40,7 +40,7 @@ ORDERED_SPECIAL_OFFERS = [
     Offer('F', 20, 2, 'F'),
     Offer('H', 80, 10, None),
     Offer('H', 45, 5, None),
-    Offer('K', 150, 2, None),
+    Offer('K', 120, 2, None),
     Offer('N', 120, 3, 'M'),
     Offer('P', 200, 5, None),
     Offer('R', 150, 3, 'Q'),
@@ -82,7 +82,3 @@ def checkout(skus):
         total += PRICE_LIST[sku] * quantity
     
     return total
-
-
-
-
