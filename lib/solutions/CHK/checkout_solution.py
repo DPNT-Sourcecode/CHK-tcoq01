@@ -8,6 +8,7 @@ PRICE_LIST = {
     'C': 20,
     'D': 15,
     'E': 40,
+    'F': 10,
 }
 
 ORDERED_SPECIAL_OFFERS = [
@@ -15,6 +16,7 @@ ORDERED_SPECIAL_OFFERS = [
     Offer('A', 130, 3, None),
     Offer('E', 80, 2, 'B'),
     Offer('B', 45, 2, None),
+    Offer('F', 20, 2, 'F'),
 ]
 
 # noinspection PyUnusedLocal
@@ -33,12 +35,12 @@ def checkout(skus):
 
         applied_offer_count = int(quantity / offer.quantity)
 
+        total += offer.price * applied_offer_count
+        checkout_items[offer.item] -= applied_offer_count * offer.quantity
+
         combined_item = offer.combined_item
         if combined_item and checkout_items[combined_item] > 0:
             checkout_items[combined_item] -= applied_offer_count
-
-        total += offer.price * applied_offer_count
-        checkout_items[offer.item] -= applied_offer_count * offer.quantity
 
     for sku, quantity in checkout_items.items():
         if sku not in PRICE_LIST:
