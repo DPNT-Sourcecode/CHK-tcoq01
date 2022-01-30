@@ -38,7 +38,7 @@ def checkout(skus):
             checkout_items[combined_item] -= applied_offer_count
 
         total += offer.price * applied_offer_count
-        checkout_items[offer.item] -= applied_offer_count
+        checkout_items[offer.item] -= applied_offer_count * offer.quantity
 
     for sku, quantity in checkout_items.items():
         if sku not in PRICE_LIST:
@@ -47,6 +47,7 @@ def checkout(skus):
         total += PRICE_LIST[sku] * quantity
     
     return total
+
 
 
 
