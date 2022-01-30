@@ -65,12 +65,8 @@ def checkout(skus):
     checkout_items = Counter(skus)
 
     for offer in ORDERED_SPECIAL_OFFERS:
-        quantity = checkout_items.get(offer.item)
-        if not quantity:
-            continue
-
         if isinstance(offer, GroupDiscount):
-            group_items_count = sum(checkout_items.get(sku) for sku in offer.items)
+            group_items_count = sum(checkout_items.get(sku, 0) for sku in offer.items)
             applied_offer_count = int(group_items_count / offer.quantity)
             sorted_group_items = sorted(
                 [PRICE_LIST[sku] for sku in offer.items],
@@ -86,6 +82,10 @@ def checkout(skus):
 
                 total += offer.price
         else:
+            quantity = checkout_items.get(offer.item)
+            if not quantity:
+                continue
+
             applied_offer_count = int(quantity / offer.quantity)
 
             for _ in range(applied_offer_count):
@@ -103,6 +103,7 @@ def checkout(skus):
         total += PRICE_LIST[sku] * quantity
     
     return total
+
 
 
 

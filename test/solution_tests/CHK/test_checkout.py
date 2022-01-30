@@ -20,13 +20,13 @@ class TestCheckout():
     def test_with_multiple_special_offers(self):
         assert checkout_solution.checkout('AAAAAAAAA') == 380
 
-    def test_with_combination_special_offers(self):
+    def test_with_combination_offers(self):
         assert checkout_solution.checkout('BEE') == 80
 
-    def test_with_multiple_combination_special_offers(self):
+    def test_with_multiple_combination_offers(self):
         assert checkout_solution.checkout('BBEE') == 110
 
-    def test_with_combination_no_free_item(self):
+    def test_with_combination_free_item__missing(self):
         assert checkout_solution.checkout('EE') == 80
 
     def test_with_combination_same_free_item(self):
@@ -38,6 +38,10 @@ class TestCheckout():
     def test_with_combination_same_free_item__repeated(self):
         assert checkout_solution.checkout('FFFF') == 30
 
-    def test_with_(self):
-        assert checkout_solution.checkout('FFFF') == 30
+    def test_with_group_discount(self):
+        assert checkout_solution.checkout('STXYZ') == 82
+
+    def test_with_group_discount__misssed(self):
+        assert checkout_solution.checkout('ST') == 40
+
 
