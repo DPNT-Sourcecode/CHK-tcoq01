@@ -29,15 +29,15 @@ def checkout(skus):
         if sku not in PRICE_LIST:
             return -1
 
+        remaining = quantity
         item_price = PRICE_LIST[sku]
-        if item_price.offer_quantity and item_price.offer_price:
-            total += (
-                item_price.offer_price * int(quantity / item_price.offer_quantity) +
-                item_price.price * (quantity % item_price.offer_quantity)
-            )
-        else:
-            total += item_price.price * quantity
+        if sku in SPECIAL_OFFERS:
+            offers = SPECIAL_OFFERS[sku]
+            for offer in offers:
+                applied_offer_count = int(remaining / offer.quantity)
+                total += offer.price * applied_offer_count
+                remaining -= applied_offer_count
+
+        total += item_price * remaining
     
     return total
-
-

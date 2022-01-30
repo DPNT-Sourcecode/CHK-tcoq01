@@ -17,3 +17,5 @@ class TestCheckout():
     def test_items_with_special_offers(self):
         assert checkout_solution.checkout('AAAABCDB') == 260
 
+    def test_items_with_multiple_special_offers(self):
+        assert checkout_solution.checkout('BBEE') == 110
