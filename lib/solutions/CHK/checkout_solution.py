@@ -1,6 +1,7 @@
 from collections import Counter, namedtuple
 
 Offer = namedtuple('Offer', ['item', 'price', 'quantity', 'combined_item'])
+GroupDiscount = namedtuple('GroupDiscount', ['items', 'price', 'quantity'])
 
 PRICE_LIST = {
     'A': 50,
@@ -48,7 +49,9 @@ ORDERED_SPECIAL_OFFERS = [
     Offer('U', 120, 3, 'U'),
     Offer('V', 130, 3, None),
     Offer('V', 90, 2, None),
+    GroupDiscount(['S', 'T', 'X', 'Y', 'Z'], 45, 3),
 ]
+
 
 
 # noinspection PyUnusedLocal
@@ -65,15 +68,20 @@ def checkout(skus):
         if not quantity:
             continue
 
-        applied_offer_count = int(quantity / offer.quantity)
+        if isinstance(offer, GroupDiscount):
+            group_items_count = sum(checkout_items.get(sku) for sku in offer.items)
+            applied_offer_count = int(group_items_count / offer.quantity)
 
-        for i in range(applied_offer_count):
-            total += offer.price
-            checkout_items[offer.item] -= offer.quantity
+        else:
+            applied_offer_count = int(quantity / offer.quantity)
 
-            combined_item = offer.combined_item
-            if combined_item and checkout_items[combined_item] > 0:
-                checkout_items[combined_item] -= 1
+            for _ in range(applied_offer_count):
+                total += offer.price
+                checkout_items[offer.item] -= offer.quantity
+
+                combined_item = offer.combined_item
+                if combined_item and checkout_items[combined_item] > 0:
+                    checkout_items[combined_item] -= 1
 
     for sku, quantity in checkout_items.items():
         if sku not in PRICE_LIST:
