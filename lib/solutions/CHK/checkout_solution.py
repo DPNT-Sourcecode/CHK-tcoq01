@@ -1,19 +1,19 @@
 from collections import Counter, namedtuple
 
-ItemPrice = namedtuple(
-    'ItemPrice',
-    [
-        'price',
-        'offer_price',
-        'offer_quantity'
-    ],
-)
+Offer = namedtuple('Offer', ['price', 'quantity', 'free_item'])
 
 PRICE_LIST = {
-    'A': ItemPrice(50, 130, 3),
-    'B': ItemPrice(30, 45, 2),
-    'C': ItemPrice(20, None, None),
-    'D': ItemPrice(15, None, None),
+    'A': 50,
+    'B': 30,
+    'C': 20,
+    'D': 15,
+    'E': 40,
+}
+
+SPECIAL_OFFERS = {
+    'A': [Offer(200, 5, None), Offer(130, 3, None)],
+    'B': [Offer(45, 2, None)],
+    'E': [Offer(80, 2, 'B')],
 }
 
 # noinspection PyUnusedLocal
@@ -39,4 +39,5 @@ def checkout(skus):
             total += item_price.price * quantity
     
     return total
+
 
