@@ -1,4 +1,5 @@
 from collections import Counter, namedtuple
+from math import remainder
 
 Offer = namedtuple('Offer', ['item', 'price', 'quantity', 'combined_item'])
 GroupDiscount = namedtuple('GroupDiscount', ['items', 'price', 'quantity'])
@@ -76,7 +77,13 @@ def checkout(skus):
                 reverse=True,
             )
             for _ in range(applied_offer_count):
+                remainder = offer.quantity
                 # Try to apply offer to items that cost more individually first
+                for sku in sorted_group_items:
+                    offer_items_count = min(remainder, offer.quantity, checkout_items[sku], 0)
+                    remainder -= offer_items_count
+                    checkout_items[sku] -= offer_items_count
+
 
 
         else:
@@ -97,4 +104,5 @@ def checkout(skus):
         total += PRICE_LIST[sku] * quantity
     
     return total
+
 
