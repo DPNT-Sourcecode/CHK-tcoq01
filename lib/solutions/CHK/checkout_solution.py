@@ -1,6 +1,9 @@
-
+from collections import Counter
 
 # noinspection PyUnusedLocal
 # skus = unicode string
 def checkout(skus):
-    raise NotImplementedError()
+    total = 0
+    items = Counter(skus)
+    
+
