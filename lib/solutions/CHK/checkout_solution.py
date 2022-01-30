@@ -19,6 +19,7 @@ ORDERED_SPECIAL_OFFERS = [
     Offer('F', 20, 2, 'F'),
 ]
 
+
 # noinspection PyUnusedLocal
 # skus = unicode string
 def checkout(skus):
@@ -50,4 +51,5 @@ def checkout(skus):
         total += PRICE_LIST[sku] * quantity
     
     return total
+
 
