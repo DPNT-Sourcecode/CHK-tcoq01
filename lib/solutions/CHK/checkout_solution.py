@@ -26,8 +26,8 @@ def checkout(skus):
     total = 0
     checkout_items = Counter(skus)
 
-    for sku, offers in ORDERED_SPECIAL_OFFERS.items():
-        if sku not in checkout_items:
+    for offer in ORDERED_SPECIAL_OFFERS:
+        if offer.item not in checkout_items:
             continue
 
         quantity = checkout_items[sku]
@@ -62,4 +62,5 @@ def checkout(skus):
         total += item_price * remaining
     
     return total
+
 
