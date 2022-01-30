@@ -4,8 +4,8 @@ ItemPrice = namedtuple(
     'ItemPrice',
     [
         'price',
-        'special_offer_price',
-        'special_offer_quantity'
+        'offer_price',
+        'offer_quantity'
     ],
 )
 
@@ -19,6 +19,20 @@ PRICE_LIST = {
 # noinspection PyUnusedLocal
 # skus = unicode string
 def checkout(skus):
+    if not isinstance(skus, str):
+        return -1
+
     total = 0
-    items = Counter(skus)
+    checkout_items = Counter(skus)
+
+    for sku, quantity in checkout_items.items():
+        if sku not in PRICE_LIST:
+            return -1
+
+        item_price = PRICE_LIST[sku]
+        total += (
+            item_price.offer_price * int(quantity / item_price.offer_quantity) +
+            item_price.price * (quantity % item_price.offer_quantity)
+        )
     
+    return total
