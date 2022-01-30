@@ -38,8 +38,8 @@ ORDERED_SPECIAL_OFFERS = [
     Offer('E', 80, 2, 'B'),
     Offer('B', 45, 2, None),
     Offer('F', 20, 2, 'F'),
-    Offer('H', 45, 5, None),
     Offer('H', 80, 10, None),
+    Offer('H', 45, 5, None),
     Offer('K', 150, 2, None),
     Offer('N', 120, 3, 'M'),
     Offer('P', 200, 5, None),
@@ -82,6 +82,7 @@ def checkout(skus):
         total += PRICE_LIST[sku] * quantity
     
     return total
+
 
 
 
