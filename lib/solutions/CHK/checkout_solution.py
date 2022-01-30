@@ -12,8 +12,8 @@ ItemPrice = namedtuple(
 PRICE_LIST = {
     'A': ItemPrice(50, 130, 3),
     'B': ItemPrice(30, 45, 2),
-    'C': ItemPrice(20, 0, 0),
-    'D': ItemPrice(15, 0, 0),
+    'C': ItemPrice(20, None, None),
+    'D': ItemPrice(15, None, None),
 }
 
 # noinspection PyUnusedLocal
@@ -30,10 +30,13 @@ def checkout(skus):
             return -1
 
         item_price = PRICE_LIST[sku]
-        total += (
-            item_price.offer_price * int(quantity / item_price.offer_quantity) +
-            item_price.price * (quantity % item_price.offer_quantity)
-        )
+        if item_price.offer_quantity and item_price.offer_price:
+            total += (
+                item_price.offer_price * int(quantity / item_price.offer_quantity) +
+                item_price.price * (quantity % item_price.offer_quantity)
+            )
+        else:
+            total += item_price.price * quantity
     
     return total
 
