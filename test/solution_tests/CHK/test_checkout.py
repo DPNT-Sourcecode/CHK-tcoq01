@@ -28,6 +28,3 @@ class TestCheckout():
 
     def test_items_with_combination_no_free_item(self):
         assert checkout_solution.checkout('EE') == 80
-
-
-

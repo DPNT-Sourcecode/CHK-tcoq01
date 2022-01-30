@@ -47,8 +47,3 @@ def checkout(skus):
         total += PRICE_LIST[sku] * quantity
     
     return total
-
-
-
-
-
