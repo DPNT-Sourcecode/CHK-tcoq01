@@ -34,7 +34,7 @@ def checkout(skus):
         applied_offer_count = int(quantity / offer.quantity)
 
         combined_item = offer.combined_item
-        if combined_item:
+        if combined_item and checkout_items[combined_item] > 0:
             checkout_items[combined_item] -= applied_offer_count
 
         total += offer.price * applied_offer_count
@@ -47,6 +47,7 @@ def checkout(skus):
         total += PRICE_LIST[sku] * quantity
     
     return total
+
 
 
 
