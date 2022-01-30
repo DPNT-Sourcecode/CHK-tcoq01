@@ -71,6 +71,13 @@ def checkout(skus):
         if isinstance(offer, GroupDiscount):
             group_items_count = sum(checkout_items.get(sku) for sku in offer.items)
             applied_offer_count = int(group_items_count / offer.quantity)
+            sorted_group_items = sorted(
+                [PRICE_LIST[sku] for sku in offer.items],
+                reverse=True,
+            )
+            for _ in range(applied_offer_count):
+                # Try to apply offer to items that cost more individually first
+
 
         else:
             applied_offer_count = int(quantity / offer.quantity)
@@ -90,3 +97,4 @@ def checkout(skus):
         total += PRICE_LIST[sku] * quantity
     
     return total
+
