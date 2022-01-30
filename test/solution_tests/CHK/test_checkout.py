@@ -35,3 +35,7 @@ class TestCheckout():
     def test_items_with_combination_same_free_item__missing(self):
         assert checkout_solution.checkout('FF') == 20
 
+    def test_items_with_combination_same_free_item__repeated(self):
+        assert checkout_solution.checkout('FFFF') == 30
+
+
