@@ -21,5 +21,9 @@ class TestCheckout():
         assert checkout_solution.checkout('AAAAAAAAA') == 380
 
     def test_items_with_combination_special_offers(self):
+        assert checkout_solution.checkout('BEE') == 80
+
+    def test_items_with_multi_combination_special_offers(self):
         assert checkout_solution.checkout('BBEE') == 110
+
 
