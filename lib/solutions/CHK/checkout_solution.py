@@ -35,6 +35,11 @@ def checkout(skus):
             offers = SPECIAL_OFFERS[sku]
             for offer in offers:
                 applied_offer_count = int(remaining / offer.quantity)
+
+                combined_item = offer.free_item
+                if combined_item:
+                    checkout_items[combined_item] -= applied_offer_count
+
                 total += offer.price * applied_offer_count
                 remaining -= applied_offer_count
 
