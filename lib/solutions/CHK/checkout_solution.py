@@ -12,8 +12,8 @@ ItemPrice = namedtuple(
 PRICE_LIST = {
     'A': ItemPrice(50, 130, 3),
     'B': ItemPrice(30, 45, 2),
-    'C': ItemPrice(20),
-    'D': ItemPrice(15),
+    'C': ItemPrice(20, 0, 0),
+    'D': ItemPrice(15, 0, 0),
 }
 
 # noinspection PyUnusedLocal
@@ -36,3 +36,4 @@ def checkout(skus):
         )
     
     return total
+
