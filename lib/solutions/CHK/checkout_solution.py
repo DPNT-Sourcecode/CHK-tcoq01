@@ -84,8 +84,7 @@ def checkout(skus):
                     remainder -= offer_items_count
                     checkout_items[sku] -= offer_items_count
 
-
-
+                total += offer.price
         else:
             applied_offer_count = int(quantity / offer.quantity)
 
@@ -104,5 +103,6 @@ def checkout(skus):
         total += PRICE_LIST[sku] * quantity
     
     return total
+
 
 
